@@ -83,14 +83,14 @@ img {
 <audio id="som" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
 
 <!-- TELA 1 -->
-<div id="tela1" class="tela ativa" onclick="abrirCarta(event)">
-    <img src="https://i.postimg.cc/HLmKKbY5/Pag-1.jpg">
+<div id="tela1" class="tela ativa" onclick="irFinal(event)">
+    <img src="https://i.postimg.cc/hGM4vDhv/Pag-1.jpg">
     <div class="dica">Toque na tela 💜</div>
 </div>
 
-<!-- TELA 3 -->
+<!-- TELA FINAL -->
 <div id="tela3" class="tela">
-    <img src="https://i.postimg.cc/hvX3xrr6/Pag-3.jpg">
+    <img src="https://i.postimg.cc/XJRvS2pK/Pag-3.jpg">
 </div>
 
 <script>
@@ -104,26 +104,18 @@ function efeitoClique(e) {
     setTimeout(() => brilho.remove(), 1000);
 }
 
-function abrirCarta(e) {
-    efeitoClique(e);
-    document.getElementById("som").play();
-    trocarTela("tela1", "tela2");
-}
-
 function irFinal(e) {
     efeitoClique(e);
-    trocarTela("tela3");
-}
+    document.getElementById("som").play();
 
-function trocarTela(atual, proxima) {
-    let tAtual = document.getElementById(atual);
-    let tProx = document.getElementById(proxima);
+    let t1 = document.getElementById("tela1");
+    let t3 = document.getElementById("tela3");
 
-    tAtual.classList.remove("ativa");
+    t1.classList.remove("ativa");
 
     setTimeout(() => {
-        tProx.classList.add("ativa");
-        tProx.classList.add("fadeZoom");
+        t3.classList.add("ativa");
+        t3.classList.add("fadeZoom");
     }, 200);
 }
 </script>
