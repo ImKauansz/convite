@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convite Especial</title>
+
+<style>
+body {
+    margin: 0;
+    background: #000;
+    overflow: hidden;
+    font-family: Arial;
+}
+
+/* TELAS */
+.tela {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.ativa {
+    display: flex;
+}
+
+/* IMAGEM */
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* TRANSIÇÃO */
+.fadeZoom {
+    animation: fadeZoom 1s;
+}
+
+@keyframes fadeZoom {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* BRILHO */
+.brilho {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.8), transparent);
+    animation: glow 1s ease-out;
+    pointer-events: none;
+}
+
+@keyframes glow {
+    from { transform: scale(0.5); opacity: 1; }
+    to { transform: scale(2); opacity: 0; }
+}
+
+/* DICA */
+.dica {
+    position: absolute;
+    bottom: 25px;
+    color: white;
+    font-size: 14px;
+    opacity: 0.7;
+    animation: piscar 1.5s infinite alternate;
+}
+
+@keyframes piscar {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SOM -->
+<audio id="som" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
+
+<!-- TELA 1 -->
+<div id="tela1" class="tela ativa" onclick="abrirCarta(event)">
+    <img src="https://i.postimg.cc/hGM4vDhv/Pag-1.jpg">
+    <div class="dica">Toque na tela 💜</div>
+</div>
+
+<!-- TELA 2 -->
+<div id="tela2" class="tela" onclick="irFinal(event)">
+    <img src="https://i.postimg.cc/k465HrXb/Pag-2.jpg">
+    <div class="dica">Toque na tela ✨</div>
+</div>
+
+<!-- TELA 3 -->
+<div id="tela3" class="tela">
+    <img src="https://i.postimg.cc/XJRvS2pK/Pag-3.jpg">
+</div>
+
+<script>
+function efeitoClique(e) {
+    let brilho = document.createElement("div");
+    brilho.className = "brilho";
+    brilho.style.left = (e.clientX - 60) + "px";
+    brilho.style.top = (e.clientY - 60) + "px";
+    document.body.appendChild(brilho);
+
+    setTimeout(() => brilho.remove(), 1000);
+}
+
+function abrirCarta(e) {
+    efeitoClique(e);
+    document.getElementById("som").play();
+    trocarTela("tela1", "tela2");
+}
+
+function irFinal(e) {
+    efeitoClique(e);
+    trocarTela("tela2", "tela3");
+}
+
+function trocarTela(atual, proxima) {
+    let tAtual = document.getElementById(atual);
+    let tProx = document.getElementById(proxima);
+
+    tAtual.classList.remove("ativa");
+
+    setTimeout(() => {
+        tProx.classList.add("ativa");
+        tProx.classList.add("fadeZoom");
+    }, 200);
+}
+</script>
+
+</body>
+</html>
